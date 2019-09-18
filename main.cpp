@@ -5,216 +5,302 @@
 using namespace std;
 
 //Prototipo de red-------------------------------------------------------------------
-
-class Red {
+void Menu ();
+class Red
+{
 private:
-    vector <char> Enrutadores;
-    vector <int> rutas;
-    vector <int> nruta;
-    vector <int> tabla;
+  vector < char >Enrutadores;
+    vector < int >rutas;
+    vector < int >nruta;
+    vector < int >tabla;
 public:
-    void nombres ();
-    void g_rutas();
-    void ordenar();
-    void agregar();
-    void Eliminar();
+  void nombres ();
+  void g_rutas ();
+  void ordenar ();
+  void agregar ();
+  void Eliminar ();
 };
 //-----------------------------------------------------------------------------------
-class Enrutador{
+class Enrutador
+{
 private:
-    char nombre;
-    vector<int> datos;
-    //costes
+  char nombre;
+    vector < int >datos;
+  //costes
 public:
-    void setnombre(char _nombre){
-        nombre=_nombre;
-    }
-    void setdatos(vector<int>);
-    char getnombre();
-    vector<int> getdatos();
-    void impr();
+  void setnombre (char _nombre)
+  {
+    nombre = _nombre;
+  }
+  void setdatos (vector < int >);
+  char getnombre ();
+  vector < int >getdatos ();
+  void impr ();
 };
 
-void Enrutador::setdatos(vector<int> _datos){
+void
+Enrutador::setdatos (vector < int >_datos)
+{
 
-    for (auto k =_datos.begin(); k!=_datos.end(); ++k) {      
-            datos.push_back(*k);
+  for (auto k = _datos.begin (); k != _datos.end (); ++k)
+    {
+      datos.push_back (*k);
     }
 }
-void Enrutador:: impr(){
-    cout<<"Enrutador : "<<nombre;
-    for (auto k = datos.begin(); k!=datos.end(); ++k) {
-            cout<<setw(10)<<*k;
-    }cout<<endl;
-}
-char Enrutador::getnombre(){
-    return nombre;
-}
-vector <int> Enrutador::getdatos(){
-        return datos;
-}
-void Red :: nombres(){
 
-    char palabra;
-    cout<<"cuando desee dejar de poner Enrutadores escriba [-] "<<endl;
-    cout<<"Nombre del Enrutador : "<<endl;
-    while (cin >> palabra) {
-    if(palabra!=45){
-        cout<<"Nombre del Enrutador : "<<endl;
-    Enrutadores.push_back(palabra);}
-    else{
-    break;
+void
+Enrutador::impr ()
+{
+  cout << "Enrutador : " << nombre;
+  for (auto k = datos.begin (); k != datos.end (); ++k)
+    {
+      cout << setw (10) << *k;
     }
-
-    }
-    cout << "Enrutadores registrados : " << Enrutadores.size() << endl;
-
+  cout << endl;
 }
-vector<Enrutador> red;
-void Red::g_rutas(){
-    red.clear();
-    rutas.clear();
-    nruta.clear();
-    int n;
-    n=Enrutadores.size();
-    if (n>2){
-    for(int i=0;i<n;i++){
-        if (i<(n-1)){
-        cout<<"conexion de "<<Enrutadores[i]<<" --> "<<Enrutadores[i+1]<<" : ";
-        int r;
-        cin>>r;
-        rutas.push_back(r);
-        }
-        else{
-            cout<<"conexion de "<<Enrutadores[i]<<" --> "<<Enrutadores[0]<<" : ";
-           int r;
-            cin>>r;
-            rutas.push_back(r);
-        }
-    }
-    }if (n==2) {
-        for(int i=0;i<n;i++){
-            if (i<(n-1)){
-            cout<<"conexion de "<<Enrutadores[i]<<" --> "<<Enrutadores[i+1]<<" : ";
-            int r;
-            cin>>r;
-            rutas.push_back(r);
-            }
-    }
+
+char
+Enrutador::getnombre ()
+{
+  return nombre;
+}
+
+vector < int >
+Enrutador::getdatos ()
+{
+  return datos;
+}
+
+void
+Red::nombres ()
+{
+
+  char palabra;
+  cout << "cuando desee dejar de poner Enrutadores escriba [-] " << endl;
+  cout << "Nombre del Enrutador : " << endl;
+  while (cin >> palabra)
+    {
+      if (palabra != 45)
+	{
+	  cout << "Nombre del Enrutador : " << endl;
+	  Enrutadores.push_back (palabra);
+	}
+      else
+	{
+	  break;
+	}
 
     }
-    if (n<=1)cout<<"Se necesita más de un enrutador para hacer una red "<<endl;
+  cout << "Enrutadores registrados : " << Enrutadores.size () << endl;
+
+}
+
+vector < Enrutador > red;
+void
+Red::g_rutas ()
+{
+  red.clear ();
+  rutas.clear ();
+  nruta.clear ();
+  int n;
+  n = Enrutadores.size ();
+  if (n > 2)
+    {
+      for (int i = 0; i < n; i++)
+	{
+	  if (i < (n - 1))
+	    {
+	      cout << "conexion de " << Enrutadores[i] << " --> " <<
+		Enrutadores[i + 1] << " : ";
+	      int r;
+	      cin >> r;
+	      rutas.push_back (r);
+	    }
+	  else
+	    {
+	      cout << "conexion de " << Enrutadores[i] << " --> " <<
+		Enrutadores[0] << " : ";
+	      int r;
+	      cin >> r;
+	      rutas.push_back (r);
+	    }
+	}
+    }
+  if (n == 2)
+    {
+      for (int i = 0; i < n; i++)
+	{
+	  if (i < n-1)
+	    {
+	      cout << "conexion de " << Enrutadores[i] << " --> " <<
+		Enrutadores[i + 1] << " : ";
+	      int r;
+	      cin >> r;
+	      rutas.push_back (r);
+	      
+	    }
+	}
+
+    }
+  if (n <= 1)
+    cout << "Se necesita mC!s de un enrutador para hacer una red " << endl;
 //--------------------------------------
 
 
 }
-void Red::agregar(){
-    char nuevo;
-    cout<<"nombre del enrutador nuevo : "<<endl;
-    cin>>nuevo;
-    Enrutadores.push_back(nuevo);
-    g_rutas();
-    ordenar();
-}
-void Red::ordenar(){
-    int n;
 
-    n=rutas.size();
-    for (int j=0;j<n-1;j++){
-       if (j==0){
-           nruta.push_back(rutas[n-1]);
-           nruta.push_back(rutas[j]);
-       }
-        nruta.push_back(rutas[j]);
-        nruta.push_back(rutas[j+1]);
-    }
-
-    for (int i=0;i<n;i++) {
-
-        int par=0,impar=1;
-        int sum=0;
-            for (int j=0;j<n;j++) {
-
-                if (nruta[i*2]==nruta[impar]){
-                    sum++;
-                    tabla.push_back(nruta[i*2]);
-
-                }
-                if (nruta[(i*2)+1]==nruta[par]){
-                    sum++;
-                    tabla.push_back(nruta[(i*2)+1]);
-                }
-                if (sum==0) {
-                    tabla.push_back(sum);
-
-                }
-
-                par=par+2;
-                impar=impar+2;
-                sum=0;
-            }cout<<endl;
-
-            Enrutador E;
-            E.setnombre(Enrutadores[i]);
-            E.setdatos(tabla);
-            red.push_back(E);
-            tabla.clear();
-        }
-
-}
-void Red::Eliminar(){
-    char Eliminar;
-    cout<<"nombre del enrutador a Eliminar : "<<endl;
-    cin>>Eliminar;
-    int tam;
-    tam=Enrutadores.size();
-    vector<char> elim;
-    elim=Enrutadores;
-    Enrutadores.clear();
-    for (int r = 0; r < tam; ++r) {
-        if (Eliminar!=elim[r]){
-            Enrutadores.push_back(elim[r]);
-        }
-    }
-   g_rutas();
-   ordenar();
-}
-
-int main()
+void
+Red::agregar ()
 {
-
-Red uno;
-uno.nombres();
-uno.g_rutas();
-uno.ordenar();
-for ( auto k=red.begin(); k != red.end(); k++ ){
-    cout<<setw(10)<<k->getnombre();
-    k->getnombre();
-    vector<int> l;
-    l=k->getdatos();
-    for (auto i=l.begin();i!=l.end();i++) {
-        cout<<setw(10)<<*i;
-    }cout<<endl;
+  char nuevo;
+  cout << "nombre del enrutador nuevo : " << endl;
+  cin >> nuevo;
+  Enrutadores.push_back (nuevo);
+  g_rutas ();
+  ordenar ();
 }
-uno.Eliminar();
 
-//for ( auto k=red.begin(); k != red.end(); k++ )
-  // k->impr();
+void
+Red::ordenar ()
+{
+  int n;
+  n = rutas.size ();
+  for (int j = 0; j < n - 1; j++)
+    {
+      if (j == 0)
+	{
+	  nruta.push_back (rutas[n - 1]);
+	  nruta.push_back (rutas[j]);
+	}
+      nruta.push_back (rutas[j]);
+      nruta.push_back (rutas[j + 1]);
+    }
 
-for ( auto k=red.begin(); k != red.end(); k++ ){
-    cout<<setw(10)<<k->getnombre();
-    vector<int> l;
-    l=k->getdatos();
-    for (auto i=l.begin();i!=l.end();i++) {
-        cout<<setw(10)<<*i;
-    }cout<<endl;
+  for (int i = 0; i < n; i++)
+    {
 
-    /*
-    for (auto j = k->getdatos().begin(); j != k->getdatos().end(); ++j) {
-          cout<<setw(10)<<*j;
+      int par = 0, impar = 1;
+      int sum = 0;
+      for (int j = 0; j < n; j++)
+	{
+
+	  if (nruta[i * 2] == nruta[impar])
+	    {
+	      sum++;
+	      tabla.push_back (nruta[i * 2]);
+
+	    }
+	  if (nruta[(i * 2) + 1] == nruta[par])
+	    {
+	      sum++;
+	      tabla.push_back (nruta[(i * 2) + 1]);
+	    }
+	  if (sum == 0)
+	    {
+	      tabla.push_back (sum);
+
+	    }
+
+	  par = par + 2;
+	  impar = impar + 2;
+	  sum = 0;
+	}
+      cout << endl;
+
+      Enrutador E;
+      E.setnombre (Enrutadores[i]);
+      E.setdatos (tabla);
+      red.push_back (E);
+      tabla.clear ();
+    }
+  
+  
+
+}
+
+void
+Red::Eliminar ()
+{
+  char Eliminar;
+  cout << "nombre del enrutador a Eliminar : " << endl;
+  cin >> Eliminar;
+  int tam;
+  tam = Enrutadores.size ();
+  vector < char >elim;
+  elim = Enrutadores;
+  Enrutadores.clear ();
+  for (int r = 0; r < tam; ++r)
+    {
+      if (Eliminar != elim[r])
+	{
+	  Enrutadores.push_back (elim[r]);
+	}
+    }
+  g_rutas ();
+  ordenar ();
+}
+
+int
+main ()
+{
+Red uno;
+int salir =0;
+while(salir==0){
+  cout << "1.Generar una red" << endl;
+  cout<<  "2.Imprimir red "<<endl;
+  cout << "3.Eliminar enrutador"<<endl;
+  cout << "4.agregar enrutador"<<endl;
+  cout << "5.salir"<<endl;
+  cout << "Ingrese la OpciC3n a ejecutar: ";
+  int opcion = 0;
+  cin >> opcion;
+  int i=0;
+  switch (opcion)
+    {
+    case 1:
+      cout << "Usted ha seleccionado la opcion 1"<<endl;
+        uno.nombres();
+        uno.g_rutas();
+        uno.ordenar();
+      break;
+    case 2:
+      cout << "Usted ha seleccionado la opcion 2"<<endl;
+      for ( auto k=red.begin(); k != red.end(); k++ )
+        k->impr();
+      break;
+    case 3:
+      cout << "Usted ha seleccionado la opcion 3"<<endl;
+      uno.Eliminar();
+      break;
+    case 4:
+      cout << "Usted ha seleccionado la opcion 4"<<endl;
+      uno.agregar();
+      break;
+    case 5:
+        cout<<"End"<<endl;
+        salir=1;
+    default:
+      cout << "Usted ha ingresado una opciC3n incorrecta"<<endl;
+    }
+}
+
+
+  /*for (auto k = red.begin (); k != red.end (); k++)
+    {
+      cout << setw (10) << k->getnombre ();
+      vector < int >l;
+      l = k->getdatos ();
+      for (auto i = l.begin (); i != l.end (); i++)
+	{
+	  cout << setw (10) << *i;
+	}
+      cout << endl;
+
+      
+         for (auto j = k->getdatos().begin(); j != k->getdatos().end(); ++j) {
+         cout<<setw(10)<<*j;
+         } 
     }*/
 }
 
 
-
-}
